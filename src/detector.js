@@ -22,8 +22,12 @@
 * limitations under the License.
 */
 
+import { AlignmentPatternFinder } from './alignpat';
+import { FinderPatternFinder } from './findpat';
+import GridSampler from './grid';
+import { Version } from './version';
 
-function PerspectiveTransform( a11,  a21,  a31,  a12,  a22,  a32,  a13,  a23,  a33)
+export function PerspectiveTransform( a11,  a21,  a31,  a12,  a22,  a32,  a13,  a23,  a33)
 {
 	this.a11 = a11;
 	this.a12 = a12;
@@ -115,14 +119,14 @@ PerspectiveTransform.quadrilateralToSquare=function( x0,  y0,  x1,  y1,  x2,  y2
 	return this.squareToQuadrilateral(x0, y0, x1, y1, x2, y2, x3, y3).buildAdjoint();
 }
 
-function DetectorResult(bits,  points)
+export function DetectorResult(bits,  points)
 {
 	this.bits = bits;
 	this.points = points;
 }
 
 
-function Detector(image)
+export function Detector(qrcode, image)
 {
 	this.image=image;
 	this.resultPointCallback = null;
@@ -302,7 +306,7 @@ function Detector(image)
 			var alignmentAreaTopY = Math.max(0, estAlignmentY - allowance);
 			var alignmentAreaBottomY = Math.min(qrcode.height - 1, estAlignmentY + allowance);
 			
-			var alignmentFinder = new AlignmentPatternFinder(this.image, alignmentAreaLeftX, alignmentAreaTopY, alignmentAreaRightX - alignmentAreaLeftX, alignmentAreaBottomY - alignmentAreaTopY, overallEstModuleSize, this.resultPointCallback);
+			var alignmentFinder = new AlignmentPatternFinder(qrcode, this.image, alignmentAreaLeftX, alignmentAreaTopY, alignmentAreaRightX - alignmentAreaLeftX, alignmentAreaBottomY - alignmentAreaTopY, overallEstModuleSize, this.resultPointCallback);
 			return alignmentFinder.find();
 		}
 		
@@ -336,7 +340,7 @@ function Detector(image)
 		{
 			
 			var sampler = GridSampler;
-			return sampler.sampleGrid3(image, dimension, transform);
+			return sampler.sampleGrid3(qrcode, image, dimension, transform);
 		}
 	
 	this.processFinderPatternInfo = function( info)
@@ -406,7 +410,7 @@ function Detector(image)
 	
 	this.detect=function()
 	{
-		var info =  new FinderPatternFinder().findFinderPattern(this.image);
+		var info =  new FinderPatternFinder(qrcode).findFinderPattern(this.image);
 			
 		return this.processFinderPatternInfo(info); 
 	}

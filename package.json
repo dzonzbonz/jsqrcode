@@ -1,0 +1,13 @@
+{
+    "name": "dzonzbonz-jsqrcode",
+    "version": "1.0.0",
+    "main": "index.js",
+    "devDependencies": {
+        "webpack": "^4.10.2",
+        "webpack-cli": "^2.1.4"
+    },
+    "dependencies": {},
+    "scripts": {
+        "build": "webpack --config=webpack.prod.js --mode=production --optimize-minimize --display-chunks=true --display=detailed"
+    }
+}

@@ -22,9 +22,10 @@
 * limitations under the License.
 */
 
+import BitMatrix from './bitmat';
+import FormatInformation from './formatinf';
 
-
-function ECB(count,  dataCodewords)
+export function ECB(count,  dataCodewords)
 {
 	this.count = count;
 	this.dataCodewords = dataCodewords;
@@ -39,7 +40,7 @@ function ECB(count,  dataCodewords)
 	});
 }
 
-function ECBlocks( ecCodewordsPerBlock,  ecBlocks1,  ecBlocks2)
+export function ECBlocks( ecCodewordsPerBlock,  ecBlocks1,  ecBlocks2)
 {
 	this.ecCodewordsPerBlock = ecCodewordsPerBlock;
 	if(ecBlocks2)
@@ -73,7 +74,7 @@ function ECBlocks( ecCodewordsPerBlock,  ecBlocks1,  ecBlocks2)
 			}
 }
 
-function Version( versionNumber,  alignmentPatternCenters,  ecBlocks1,  ecBlocks2,  ecBlocks3,  ecBlocks4)
+export function Version( versionNumber,  alignmentPatternCenters,  ecBlocks1,  ecBlocks2,  ecBlocks3,  ecBlocks4)
 {
 	this.versionNumber = versionNumber;
 	this.alignmentPatternCenters = alignmentPatternCenters;
@@ -216,7 +217,7 @@ Version.decodeVersionInformation=function( versionBits)
 	return null;
 }
 
-function buildVersions()
+export function buildVersions()
 {
 	return new Array(new Version(1, new Array(), new ECBlocks(7, new ECB(1, 19)), new ECBlocks(10, new ECB(1, 16)), new ECBlocks(13, new ECB(1, 13)), new ECBlocks(17, new ECB(1, 9))), 
 	new Version(2, new Array(6, 18), new ECBlocks(10, new ECB(1, 34)), new ECBlocks(16, new ECB(1, 28)), new ECBlocks(22, new ECB(1, 22)), new ECBlocks(28, new ECB(1, 16))), 

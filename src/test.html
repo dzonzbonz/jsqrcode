@@ -26,12 +26,12 @@
 
 <script type="text/javascript">
 var gCtx = null;
-	var gCanvas = null;
+var gCanvas = null;
 
-	var imageData = null;
-	var ii=0;
-	var jj=0;
-	var c=0;
+var imageData = null;
+var ii=0;
+var jj=0;
+var c=0;
 	
 	
 function dragenter(e) {
@@ -79,7 +79,7 @@ function load()
 {
 	initCanvas(640,480);
 	qrcode.callback = read;
-	qrcode.decode("meqrthumb.png");
+	qrcode.decode("http://www.apps111.com/blog/wp-content/uploads/2012/10/qr-coupon-qr-code.png");
 }
 
 function initCanvas(ww,hh)
@@ -122,11 +122,9 @@ function initCanvas(ww,hh)
 		} 
  	} 
 
-        function captureToCanvas() {
-		flash = document.getElementById("embedflash");
-		flash.ccCapture();
+	function captureToCanvas() {
 		qrcode.decode();
-        }
+	}
 </script>
 
 </head>

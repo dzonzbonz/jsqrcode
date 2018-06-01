@@ -1,5 +1,5 @@
 const common = require('./webpack.common')({
-    isMinimized: false,
+    isMinimized: true,
     entry: './index',
     output: 'jsqrcode',
     
